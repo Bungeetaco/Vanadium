@@ -3,14 +3,14 @@ target_os = "android"
 target_cpu = "arm64"
 
 android_channel = "stable"
-android_default_version_name = "93.0.4577.82"
-android_default_version_code = "457708200"
+android_default_version_name = "101.0.4951.61"
+android_default_version_code = "495106100"
 
 is_component_build = false
 is_debug = false
 is_official_build = true
 symbol_level = 1
-fieldtrial_testing_like_official_build = true
+disable_fieldtrial_testing_config = true
 
 dfmify_dev_ui = false
 disable_autofill_assistant_dfm = true
@@ -21,6 +21,7 @@ ffmpeg_branding = "Chrome"
 proprietary_codecs = true
 
 is_cfi = true
+use_cfi_cast = true
 
 enable_gvr_services = false
 enable_remoting = false

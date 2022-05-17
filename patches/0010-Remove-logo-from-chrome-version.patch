@@ -1,17 +1,17 @@
-From 571025e70070d6d96d2c957bea2570f8859baee3 Mon Sep 17 00:00:00 2001
+From 89a466b9a00c2b6ae202e6684029576b4a829de0 Mon Sep 17 00:00:00 2001
 From: A Mak <refragable@mailbox.org>
 Date: Sat, 25 Jul 2020 17:56:47 -0700
-Subject: [PATCH 10/77] Remove logo from chrome://version
+Subject: [PATCH] Remove logo from chrome://version
 
 ---
  components/version_ui/resources/about_version.html | 7 -------
  1 file changed, 7 deletions(-)
 
 diff --git a/components/version_ui/resources/about_version.html b/components/version_ui/resources/about_version.html
-index 1caa96b60599c..d1158ca6b8836 100644
+index 42cabec4c7798..0100a10109131 100644
 --- a/components/version_ui/resources/about_version.html
 +++ b/components/version_ui/resources/about_version.html
-@@ -39,13 +39,6 @@ about:version template page
+@@ -55,13 +55,6 @@ about:version template page
                    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
            <img alt="$i18n{logo_alt_text}" src="chrome://theme/IDR_PRODUCT_LOGO">
          </picture>
@@ -25,6 +25,3 @@ index 1caa96b60599c..d1158ca6b8836 100644
  </if>
          <div id="company">$i18n{company}</div>
          <div id="copyright">$i18n{copyright}</div>
--- 
-2.33.0
-

@@ -1,7 +1,7 @@
-From 2f42449cfc46af96ec6e95886be6cef730b45d74 Mon Sep 17 00:00:00 2001
+From b7af340af17dd515fbb41a3e91b8a13757cb69f4 Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Thu, 8 Mar 2018 22:43:12 -0500
-Subject: [PATCH 25/77] disable article suggestions feature by default
+Subject: [PATCH] disable article suggestions feature by default
 
 ---
  components/feed/core/shared_prefs/pref_names.cc | 4 ++--
@@ -24,10 +24,10 @@ index 57a65895fbded..511f7a2b500e1 100644
  }
  
 diff --git a/components/ntp_snippets/features.cc b/components/ntp_snippets/features.cc
-index c5ea510f1e580..688887dc4ba76 100644
+index 5bb7995bc5bdf..243afdbd79bae 100644
 --- a/components/ntp_snippets/features.cc
 +++ b/components/ntp_snippets/features.cc
-@@ -39,7 +39,7 @@ const base::Feature* const kAllFeatures[] = {
+@@ -38,7 +38,7 @@ const base::Feature* const kAllFeatures[] = {
      &kOptionalImagesEnabledFeature};
  
  const base::Feature kArticleSuggestionsFeature{
@@ -36,6 +36,3 @@ index c5ea510f1e580..688887dc4ba76 100644
  
  const base::Feature kRemoteSuggestionsEmulateM58FetchingSchedule{
      "RemoteSuggestionsEmulateM58FetchingSchedule",
--- 
-2.33.0
-

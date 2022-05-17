@@ -1,33 +1,15 @@
-From 9daec6f09c87e40d84e98dbde39eb1a95b14b103 Mon Sep 17 00:00:00 2001
+From d491cce4ce908449b50d466f6b6f1bc7f1754658 Mon Sep 17 00:00:00 2001
 From: csagan5 <32685696+csagan5@users.noreply.github.com>
 Date: Sun, 26 Nov 2017 22:51:43 +0100
-Subject: [PATCH 15/77] disable first run welcome page
+Subject: [PATCH] disable first run welcome page
 
 ---
- .../chromium/chrome/browser/firstrun/FirstRunStatus.java    | 5 ++++-
  .../org/chromium/chrome/browser/firstrun/FirstRunUtils.java | 3 ---
- .../chrome/browser/firstrun/ToSAndUMAFirstRunFragment.java  | 6 ------
- 3 files changed, 4 insertions(+), 10 deletions(-)
+ .../chromium/chrome/browser/firstrun/FirstRunStatus.java    | 6 +++++-
+ 2 files changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/chrome/android/java/src/org/chromium/chrome/browser/firstrun/FirstRunStatus.java b/chrome/android/java/src/org/chromium/chrome/browser/firstrun/FirstRunStatus.java
-index bc3f0163b3fe0..95cee0a8eb006 100644
---- a/chrome/android/java/src/org/chromium/chrome/browser/firstrun/FirstRunStatus.java
-+++ b/chrome/android/java/src/org/chromium/chrome/browser/firstrun/FirstRunStatus.java
-@@ -43,8 +43,11 @@ public class FirstRunStatus {
-      * includes ToS and Sign In pages if necessary.
-      */
-     public static boolean getFirstRunFlowComplete() {
--        return SharedPreferencesManager.getInstance().readBoolean(
-+        boolean complete = SharedPreferencesManager.getInstance().readBoolean(
-                 ChromePreferenceKeys.FIRST_RUN_FLOW_COMPLETE, false);
-+        if (!complete)
-+           setFirstRunFlowComplete(true);
-+        return true;
-     }
- 
-     /**
 diff --git a/chrome/android/java/src/org/chromium/chrome/browser/firstrun/FirstRunUtils.java b/chrome/android/java/src/org/chromium/chrome/browser/firstrun/FirstRunUtils.java
-index bdb19e7c20ffb..ae29235275e4d 100644
+index df973d0cfe8cf..1669531359f5d 100644
 --- a/chrome/android/java/src/org/chromium/chrome/browser/firstrun/FirstRunUtils.java
 +++ b/chrome/android/java/src/org/chromium/chrome/browser/firstrun/FirstRunUtils.java
 @@ -43,15 +43,12 @@ public class FirstRunUtils {
@@ -46,23 +28,21 @@ index bdb19e7c20ffb..ae29235275e4d 100644
      }
  
      /**
-diff --git a/chrome/android/java/src/org/chromium/chrome/browser/firstrun/ToSAndUMAFirstRunFragment.java b/chrome/android/java/src/org/chromium/chrome/browser/firstrun/ToSAndUMAFirstRunFragment.java
-index 46bfe0803eda3..7bcb81da1a110 100644
---- a/chrome/android/java/src/org/chromium/chrome/browser/firstrun/ToSAndUMAFirstRunFragment.java
-+++ b/chrome/android/java/src/org/chromium/chrome/browser/firstrun/ToSAndUMAFirstRunFragment.java
-@@ -98,12 +98,6 @@ public class ToSAndUMAFirstRunFragment extends Fragment implements FirstRunFragm
+diff --git a/chrome/browser/first_run/android/java/src/org/chromium/chrome/browser/firstrun/FirstRunStatus.java b/chrome/browser/first_run/android/java/src/org/chromium/chrome/browser/firstrun/FirstRunStatus.java
+index 13bec9f270f5b..ed940dd77727d 100644
+--- a/chrome/browser/first_run/android/java/src/org/chromium/chrome/browser/firstrun/FirstRunStatus.java
++++ b/chrome/browser/first_run/android/java/src/org/chromium/chrome/browser/firstrun/FirstRunStatus.java
+@@ -43,8 +43,12 @@ public class FirstRunStatus {
+      * includes ToS and Sign In pages if necessary.
+      */
+     public static boolean getFirstRunFlowComplete() {
+-        return SharedPreferencesManager.getInstance().readBoolean(
++        boolean complete = SharedPreferencesManager.getInstance().readBoolean(
+                 ChromePreferenceKeys.FIRST_RUN_FLOW_COMPLETE, false);
++        if (!complete) {
++           setFirstRunFlowComplete(true);
++        }
++        return true;
+     }
  
-         mAcceptButton.setOnClickListener((v) -> onTosButtonClicked());
- 
--        mSendReportCheckBox.setChecked(getUmaCheckBoxInitialState());
--        if (!canShowUmaCheckBox()) {
--            mSendReportCheckBox.setVisibility(View.GONE);
--        }
--
--        mTosAndPrivacy.setMovementMethod(LinkMovementMethod.getInstance());
- 
-         Resources resources = getResources();
-         NoUnderlineClickableSpan clickableGoogleTermsSpan =
--- 
-2.33.0
-
+     /**
